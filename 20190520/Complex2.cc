@@ -5,18 +5,14 @@
  ///
  
 #include <iostream>
+#include <limits>
 using std::cout;
 using std::endl;
 
-// <<重温微积分>>
-// <<随机过程>>
-// <<矩阵论>>
-// <<机器学习>>
-// <<计算理论>>
 class Complex
 {
 public:
-	Complex(double real, double image)
+	Complex(double real = 0, double image = 0)
 	: _real(real)
 	, _image(image)
 	{}
@@ -53,9 +49,13 @@ public:
 		return *this;
 	}
 
+	//std::ostream operator<<();
+
 	//friend Complex operator+(const Complex & lhs, const Complex & rhs);
 	
 	friend bool operator==(const Complex & lhs, const Complex & rhs);
+	friend std::ostream & operator<<(std::ostream & os, const Complex & rhs);
+	friend std::istream & operator>>(std::istream & is, Complex & rhs);
 private:
 	double _real;
 	double _image;// -1 = i ^ 2
@@ -88,7 +88,40 @@ bool operator!=(const Complex & lhs, const Complex & rhs)
 {
 	return !(lhs == rhs);//充分的利用已经实现的函数
 }
- 
+
+//所有的流对象都是不能进行复制的, 表达的是对象语义
+std::ostream & operator<<(std::ostream & os, const Complex & rhs)
+{
+	cout << rhs._real << " + " << rhs._image << "i" << endl;
+	return os;
+}
+
+void readDouble(std::istream & is, double & value) 
+{
+	cout << ">> pls input a valid double number:" << endl;
+	while(is >> value, !is.eof()) {
+		if(is.bad()) {
+			cout << "istream is corrupted!" << endl;
+			return;
+		} else if (is.fail()) {
+			is.clear();
+			is.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+			cout << ">> pls input a valid double number:" << endl;
+			continue;
+		}
+		break;
+	}
+}
+
+std::istream & operator>>(std::istream & is, Complex & rhs)
+{	//对异常情况做处理
+	//培养思维的完备性
+	readDouble(is, rhs._real);
+	readDouble(is, rhs._image);
+	return is;
+}
+
+
 int test0(void)
 {
 	int a = 1, b = 2;
@@ -142,9 +175,33 @@ void test2()
 	c1.print();
 }
 
+void test3()
+{
+	int a = 1;
+	cout << "a = " << a << endl;
+
+	Complex c1(1, 2), c2(3, 4);
+	cout << "c1 = " << c1 << endl
+		 << "c2 = " << c2 << endl;//链式编程
+	//operator<<(operator<<(cout, "c1 = "), c1);
+}
+
+void test4()
+{
+	cout << ">> pls input a interger number:" << endl;
+	int a;
+	std::cin >> a;
+
+	Complex c1;
+	std::cin >> c1;
+	cout << "c1 = " << c1 << endl; 
+}
+
 int main(void)
 {
 	//test1();
-	test2();
+	//test2();
+	//test3();
+	test4();
 	return 0;
 }
