@@ -44,6 +44,7 @@ void test4()
 	int number = 1;
 	const char * p = "hello,world";
 
+	LogError("error message");
 	LogError("error message, %d, %s", number, p);
 }
 
@@ -60,7 +61,8 @@ int main(void)
 	//test0();
 	//test1();
 	//test2();
-	test3();
+	//test3();
+	test4();
 
 	wd::Mylogger::destroy();
 	return 0;
