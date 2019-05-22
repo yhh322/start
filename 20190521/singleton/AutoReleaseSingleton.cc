@@ -24,6 +24,7 @@ class Singleton
 			if(_pInstance)
 				delete _pInstance;
 		}
+	
 	};
 public:
 	static Singleton * getInstance()

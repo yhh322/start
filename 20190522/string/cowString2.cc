@@ -21,14 +21,14 @@ class CowString
 		{}
 
 		char & operator=(const char & ch);
-		
-		friend std::ostream & operator<<(std::ostream & os, const CharProxy & rhs);
+
+		operator char()
+		{	return _self._pstr[_idx];	}
 	
 	private:
 		int _idx;
 		CowString & _self;
 	};
-	friend std::ostream & operator<<(std::ostream & os, const CharProxy & rhs);
 public:
 	CowString();
 	CowString(const char * pstr);
@@ -129,12 +129,6 @@ char & CowString::CharProxy::operator=(const char & ch)
 		static char nullchar = '\0';
 		return nullchar;
 	}
-}
-
-std::ostream & operator<<(std::ostream & os, const CowString::CharProxy & rhs)
-{
-	os << rhs._self._pstr[rhs._idx];
-	return os;
 }
 
 std::ostream & operator<<(std::ostream & os, const CowString & rhs)
