@@ -10,6 +10,8 @@ using std::cout;
 using std::endl;
 
 //自动释放方法二: atexit + 静态方法
+//
+//atexit注册的函数指针，在程序退出时，会被自动调用
 
 class Singleton
 {

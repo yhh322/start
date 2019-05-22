@@ -35,12 +35,6 @@ public:
 
 	void print() const {	cout << "print()" << endl;	}	
 
-	static void destroy()
-	{
-		if(_pInstance)
-			delete _pInstance;
-	}
-
 private:
 	Singleton() {	cout << "Singleton()" << endl;	}
 	~Singleton() {	cout << "~Singleton()" << endl;	}
