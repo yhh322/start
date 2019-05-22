@@ -24,6 +24,7 @@ class Singleton
 			if(_pInstance)
 				delete _pInstance;
 		}
+	
 	};
 public:
 	static Singleton * getInstance()
@@ -34,12 +35,6 @@ public:
 	}
 
 	void print() const {	cout << "print()" << endl;	}	
-
-	static void destroy()
-	{
-		if(_pInstance)
-			delete _pInstance;
-	}
 
 private:
 	Singleton() {	cout << "Singleton()" << endl;	}

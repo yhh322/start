@@ -16,6 +16,7 @@ class Singleton
 public:
 	static Singleton * getInstance()
 	{
+		//能够保证在多线程环境下，init函数只会被执行一次
 		pthread_once(&_once, init);
 		return _pInstance;
 	}
