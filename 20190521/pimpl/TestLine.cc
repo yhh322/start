@@ -14,8 +14,8 @@ int main(void)
 	Line line(1, 2, 3, 4);
 	line.printLine();
 
-	Line::Point pt(11, 22);//error
-	pt.print();
+	//Line::Point pt(11, 22);//error
+	//pt.print();
 
 	return 0;
 }

@@ -7,7 +7,6 @@
 #ifndef __LINE_H__
 #define __LINE_H__
 
-
 class Line
 {//作为接口存在
  //PIMPL设计模式
@@ -25,7 +24,5 @@ public:
 private:
 	LineImpl * _pimpl;
 };
-
- 
 
 #endif
