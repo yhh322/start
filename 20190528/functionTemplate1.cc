@@ -4,6 +4,7 @@
  /// @date    2019-05-28 10:51:50
  ///
  
+#include <string.h>
 #include <iostream>
 using std::cout;
 using std::endl;
@@ -37,6 +38,20 @@ int add(int x, int y)
 	return x + y;
 }
 #endif
+
+//当模板形参列表有多个参数时, 还可以对某一个参数设置一个特殊的类型
+//模板偏特化
+
+//模板特化(Specialization)
+//	> 特化版本不唯一
+template <>
+const char * add<const char *>(const char * p1, const char * p2)
+{
+	char * ptmp = new char[strlen(p1) + strlen(p2) + 1]();
+	strcpy(ptmp, p1);
+	strcat(ptmp, p2);
+	return ptmp;
+}
  
 int main(void)
 {
@@ -44,6 +59,8 @@ int main(void)
 	double x3 = 1.11, x4 = 2.22;
 	char x5 = 'a', x6 = 1;
 	long x7 = 100, x8 = 101;
+	const char * str1 = "hello";
+	const char * str2 = "world";
 
 	cout << "add(x1, x2) = " << add(x1, x2) << endl;//隐式实例化
 	cout << "add(x3, x4) = " << add<double>(x3, x4) << endl;//显式实例化
@@ -52,6 +69,7 @@ int main(void)
 	cout << "add(x1, x2, x9) = " << add(x2, x2, x9) << endl;
 
 	//cout << add(x1, x3) << endl;//error
+	cout << "add(str1, str2) = " << add(str1, str2) << endl;
 
 	return 0;
 }
