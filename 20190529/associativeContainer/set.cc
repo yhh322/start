@@ -15,6 +15,7 @@ using std::string;
 template <typename Container>
 void display(const Container & c)
 {
+	typename Container::value_type t;
 	for(auto & elem : c) { //& 不可少，如果没加，就会复制的
 		cout << elem << " ";
 	}
