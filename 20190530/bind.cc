@@ -36,6 +36,9 @@ struct Example
 		cout << "Example::add()" << endl;
 		cout << "x + y = " << x + y << endl;
 	}
+
+//private:
+	int _x = 10;
 };
 
 void test1()
@@ -60,6 +63,9 @@ void test1()
 	using namespace std::placeholders;
 	auto f4 = bind(&Example::add, &example, _1, _2);
 	f4(11, 12);
+
+	auto f5 = bind(&Example::_x, &example);
+	cout << f5() << endl;
 }
 
 void print(int x1, int x2, int & x3, int x4)
@@ -106,8 +112,8 @@ void test3()
 int main(void)
 {
 	//test0();
-	///test1();
+	test1();
 	//test2();
-	test3();
+	//test3();
 	return 0;
 }
