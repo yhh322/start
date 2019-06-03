@@ -46,7 +46,7 @@ public:
 	//具有移动语义的函数要优先于具有复制控制语义的函数
 #if 1
 	//移动构造函数
-	String(String && rhs)
+	String(String && rhs) ///rhs本身是一个左值
 	: _pstr(rhs._pstr) //浅拷贝
 	{
 		cout << "String(String && )" << endl;
@@ -57,7 +57,7 @@ public:
 	String & operator=(String && rhs)
 	{
 		cout << "String & operator=(String && rhs)" << endl;
-		if(this != & rhs) {
+		if(this != &rhs) {
 			delete [] _pstr;
 
 			_pstr = rhs._pstr;
@@ -86,7 +86,7 @@ std::ostream & operator<<(std::ostream & os, const String & rhs)
 	return os;
 }
  
-int main(void)
+int test0(void)
 {
 	vector<String> strs;
 	strs.push_back("hello,world");
@@ -116,7 +116,36 @@ int main(void)
 
 	cout << "......" << endl;
 
+	return 0;
+}
+
+String & getString0()
+{}
 
 
+String s1("hello");//全局对象
+
+String getString()
+{
+	//String str("hello");//局部对象
+	//return str;//当返回的对象时局部对象时，
+			  //如果定义了移动构造函数，return时调用的是移动构造函数
+	return s1;//当返回的对象是全局对象，return时调用的是复制构造函数
+}
+
+
+void test1()
+{
+	int a = 1, b = 2;
+	cout << "a = " << a << ", b = " << b << endl;
+	b = std::move(a);//对于内置类型数据，表现的不明显
+	cout << "a = " << a << ", b = " << b << endl;
+
+	getString();
+}
+
+int main(void)
+{
+	test1();
 	return 0;
 }
