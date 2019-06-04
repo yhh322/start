@@ -127,10 +127,10 @@ String s1("hello");//全局对象
 
 String getString()
 {
-	//String str("hello");//局部对象
-	//return str;//当返回的对象时局部对象时，
+	String str("hello");//局部对象
+	return str;//当返回的对象时局部对象时，
 			  //如果定义了移动构造函数，return时调用的是移动构造函数
-	return s1;//当返回的对象是全局对象，return时调用的是复制构造函数
+	//return s1;//当返回的对象是全局对象，return时调用的是复制构造函数
 }
 
 
